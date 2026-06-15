@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thread Engineering Academy – Complete Guide to Mechanical Threads</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .interactive-svg-element { transition: all 0.2s ease; cursor: pointer; }
+        .interactive-svg-element:hover { stroke: #2563eb !important; stroke-width: 3px !important; filter: drop-shadow(0 0 4px rgba(37,99,235,0.5)); }
+        .active-term { stroke: #10b981 !important; stroke-width: 3px !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg">
+                    <i class="fa-solid fa-gears text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 tracking-tight">Thread Engineering Academy</h1>
+                    <p class="text-xs text-slate-500 font-medium tracking-wide uppercase">Complete Mechanical Thread System Guide</p>
+                </div>
+            </div>
+            <nav class="hidden xl:flex space-x-1 text-sm font-medium text-slate-600">
+                <a href="#intro" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Fundamentals</a>
+                <a href="#terminology" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Terminology</a>
+                <a href="#types" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Thread Types</a>
+                <a href="#calculators" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Calculators</a>
+                <a href="#lab" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Visualization Lab</a>
+                <a href="#manufacturing" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Production</a>
+                <a href="#failure" class="px-3 py-2 rounded-md hover:bg-slate-100 hover:text-slate-900 transition">Failure Analysis</a>
+                <a href="#assistant" class="px-3 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Selection Assistant</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 grid grid-cols-1 xl:grid-cols-4 gap-8">
+        <aside class="xl:col-span-1 space-y-2 sticky top-24 self-start max-h-[82vh] overflow-y-auto pr-2 hidden xl:block border-r border-slate-200">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Academy Course Syllabus</p>
+            <a href="#intro" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-circle-info w-5 text-slate-400"></i> <span>1. Introduction to Threads</span></a>
+            <a href="#terminology" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-compass-drafting w-5 text-slate-400"></i> <span>2. Geometric Terminology</span></a>
+            <a href="#types" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-layer-group w-5 text-slate-400"></i> <span>3. Thread Standard Typologies</span></a>
+            <a href="#mating" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-bolt-lightning w-5 text-slate-400"></i> <span>4. Mating & Assembly Kinematics</span></a>
+            <a href="#standards" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-book w-5 text-slate-400"></i> <span>5. Global Standards Library</span></a>
+            <a href="#calculators" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-calculator w-5 text-slate-400"></i> <span>6. Core Engineering Calculators</span></a>
+            <a href="#lab" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-flask-vial w-5 text-slate-400"></i> <span>7. Thread Visualization Lab</span></a>
+            <a href="#manufacturing" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-industry w-5 text-slate-400"></i> <span>8. Manufacturing Methods</span></a>
+            <a href="#tools" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-screwdriver-wrench w-5 text-slate-400"></i> <span>9. Tooling & Metrology Encyclopedia</span></a>
+            <a href="#inspection" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-microscope w-5 text-slate-400"></i> <span>10. Inspection & GD&T Controls</span></a>
+            <a href="#failure" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-triangle-exclamation w-5 text-slate-400"></i> <span>11. Structural Failure Gallery</span></a>
+            <a href="#bestpractices" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-star w-5 text-slate-400"></i> <span>12. Mechanical Best Practices</span></a>
+            <a href="#cad" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-cubes w-5 text-slate-400"></i> <span>13. CAD Modeling Workflows</span></a>
+            <a href="#applications" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-car-rear w-5 text-slate-400"></i> <span>14. Industrial Frameworks</span></a>
+            <a href="#assistant" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-blue-700 bg-blue-50/50 border-l-2 border-blue-600 transition"><i class="fa-solid fa-wand-magic-sparkles w-5 text-blue-600"></i> <span>15. Selection Assistant</span></a>
+            <a href="#resources" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-white hover:shadow-xs border-l-2 border-transparent hover:border-blue-600 transition"><i class="fa-solid fa-download w-5 text-slate-400"></i> <span>16. Engineering Data Vault</span></a>
+        </aside>
+
+        <main class="xl:col-span-3 space-y-16">
+
+            <section id="intro" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 01</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Introduction to Screw Threads</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-4">
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            A <strong>screw thread</strong> is a continuous helical ridge formed on the inside (internal thread) or outside (external thread) of a cylinder or cone. Essentially acting as an inclined plane wrapped around a cylinder, threads are one of the core simple machines utilized across modern mechanical engineering architectures.
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 space-y-2">
+                            <h4 class="font-semibold text-xs text-slate-700 uppercase tracking-wider">Primary Mechanical Functions</h4>
+                            <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                                <li><strong>Fastening / Joining:</strong> Securing sub-assemblies temporarily (removable joints).</li>
+                                <li><strong>Force / Torque Amplification:</strong> Multiplying user or motor input force to lift loads or clamp structural elements together.</li>
+                                <li><strong>Motion Conversion:</strong> Converting pure rotary displacement into precise linear travel (e.g., lead screws, linear actuators).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col items-center justify-center">
+                        <svg viewBox="0 0 200 120" class="w-full max-w-[260px] h-auto drop-shadow-xs">
+                            <path d="M 20 20 L 160 20 L 160 35 L 140 45 L 160 55 L 140 65 L 160 75 L 140 85 L 160 95 L 160 100 L 20 100 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+                            <path d="M 160 35 L 180 35 L 180 45 L 160 45 M 160 55 L 180 55 L 180 65 L 160 65 M 160 75 L 180 75 L 180 85 L 160 85 M 160 95 L 180 95" stroke="#64748b" stroke-width="1.5" fill="none"/>
+                            <text x="80" y="65" text-anchor="middle" fill="#475569" font-size="11" font-weight="bold">External Thread Profile</text>
+                        </svg>
+                        <span class="text-[11px] text-slate-400 mt-2 font-mono">Figure 1.1: Basic Helical Profile Wrapped Over a Cylinder</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg">
+                        <h4 class="text-sm font-semibold text-emerald-900 flex items-center mb-2"><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Engineering Advantages</h4>
+                        <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                            <li>High axial clamping force from low rotational torque.</li>
+                            <li>Self-locking characteristics can be achieved via helix geometries.</li>
+                            <li>Standardized worldwide, simple replacement and service loops.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-amber-50/50 border border-amber-100 rounded-lg">
+                        <h4 class="text-sm font-semibold text-amber-900 flex items-center mb-2"><i class="fa-solid fa-circle-xmark text-amber-600 mr-2"></i> Design Limitations</h4>
+                        <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                            <li>High stress concentrations generated at thread root radii.</li>
+                            <li>Susceptible to vibrational loosening under alternating load dynamics.</li>
+                            <li>Requires high precision execution to minimize fit clearance issues.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="terminology" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 02</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Thread Terminology Laboratory</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Hover or select individual terms to identify corresponding geometric dimensions interactively.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 space-y-1 max-h-[350px] overflow-y-auto pr-2">
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="major-dia">
+                            <span>Major Diameter ($d$ / $D$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="minor-dia">
+                            <span>Minor Diameter ($d_1$ / $D_1$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="pitch-dia">
+                            <span>Pitch Diameter ($d_2$ / $D_2$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="pitch">
+                            <span>Pitch ($P$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="lead">
+                            <span>Lead ($L$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="crest">
+                            <span>Crest</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="root">
+                            <span>Root</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="flank">
+                            <span>Flank</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                        <div class="term-item p-2 rounded-md hover:bg-blue-50 border border-transparent cursor-pointer text-xs font-medium transition flex items-center justify-between" data-term="angle">
+                            <span>Thread Angle ($\alpha$)</span><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-center justify-center min-h-[300px]">
+                        <svg viewBox="0 0 400 300" class="w-full h-auto">
+                            <path d="M 40 40 L 100 40 L 140 140 L 180 40 L 220 140 L 260 40 L 300 140 L 340 40 L 380 40" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linejoin="round"/>
+                            <path d="M 40 260 L 380 260" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4"/>
+                            
+                            <line id="svg-major-dia" class="interactive-svg-element" x1="100" y1="40" x2="100" y2="260" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2"/>
+                            <line id="svg-minor-dia" class="interactive-svg-element" x1="140" y1="140" x2="140" y2="260" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2"/>
+                            <line id="svg-pitch-dia" class="interactive-svg-element" x1="120" y1="90" x2="120" y2="260" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2"/>
+                            
+                            <path id="svg-pitch" class="interactive-svg-element" d="M 100 25 L 180 25" stroke="#475569" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+                            
+                            <circle id="svg-crest" class="interactive-svg-element" cx="100" cy="40" r="6" fill="none" stroke="#dc2626" stroke-width="2"/>
+                            <circle id="svg-root" class="interactive-svg-element" cx="140" cy="140" r="6" fill="none" stroke="#dc2626" stroke-width="2"/>
+                            <line id="svg-flank" class="interactive-svg-element" x1="100" y1="40" x2="140" y2="140" stroke="#eab308" stroke-width="3.5"/>
+                            
+                            <path id="svg-angle" class="interactive-svg-element" d="M 125 100 A 20 20 0 0 1 155 100" fill="none" stroke="#2563eb" stroke-width="2"/>
+
+                            <defs>
+                                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <div class="lg:col-span-3 flex flex-col justify-between">
+                        <div id="term-readout" class="bg-blue-50/50 border border-blue-100 p-4 rounded-xl flex-1 flex flex-col justify-center">
+                            <h4 id="term-title" class="font-bold text-sm text-blue-900 mb-1">Select geometric parameter</h4>
+                            <p id="term-desc" class="text-xs text-slate-600 leading-relaxed">Hover over items on the left side directory or pick features within the reference layout to dissect physical thread definitions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="types" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 03</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Thread Families & Profile Typologies</h2>
+                </div>
+                
+                <div id="thread-types-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    </div>
+            </section>
+
+            <section id="mating" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 04</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Internal vs External Thread Mating</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Interactive simulation tracking mechanical fit clearances and dynamic thread engagement length vectors.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-7 bg-slate-50 rounded-xl p-4 border border-slate-100 flex flex-col items-center">
+                        <div class="w-full bg-white rounded-lg border border-slate-200 p-2 flex justify-center">
+                            <svg id="engagement-svg" viewBox="0 0 400 180" class="w-full max-w-[420px] h-auto">
+                                <path id="nut-left" d="M 10 10 L 120 10 L 120 30 L 100 50 L 120 70 L 100 90 L 120 110 L 100 130 L 120 150 L 120 170 L 10 170 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                                <path id="nut-right" d="M 390 10 L 280 10 L 280 30 L 300 50 L 280 70 L 300 90 L 280 110 L 300 130 L 280 150 L 280 170 L 390 170 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                                
+                                <g id="bolt-group" transform="translate(0, 0)">
+                                    <path d="M 130 -40 L 270 -40 L 270 140 L 130 140 Z" fill="#93c5fd" opacity="0.8" stroke="#3b82f6" stroke-width="1.5"/>
+                                    <path d="M 130 -20 L 105 -10 L 130 10 L 105 20 L 130 40 L 105 50 L 130 70 L 105 80 L 130 100 L 105 110 L 130 130" fill="none" stroke="#2563eb" stroke-width="2"/>
+                                    <path d="M 270 -20 L 295 -10 L 270 10 L 295 20 L 270 40 L 295 50 L 270 70 L 295 80 L 270 100 L 295 110 L 270 130" fill="none" stroke="#2563eb" stroke-width="2"/>
+                                    <rect x="90" y="-80" width="220" height="40" fill="#1e3a8a" rx="4"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5 space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Assembly Insertion Depth</label>
+                            <input id="engagement-slider" type="range" min="0" max="95" value="45" class="w-full accent-blue-600">
+                        </div>
+                        <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100 text-xs space-y-2 text-slate-700">
+                            <p class="font-semibold text-blue-900"><i class="fa-solid fa-circle-info mr-1"></i> Fundamental Mating Principles</p>
+                            <p>For optimal load distribution and avoidance of shear-out failure, the thread engagement length ($L_e$) must meet threshold calculations relative to nominal diameters.</p>
+                            <p class="font-mono text-[11px] text-blue-800 bg-white p-1 rounded border border-blue-100 text-center">Steel Fixings Rule: Le ≥ 1.0 × d<br>Aluminum Fixings Rule: Le ≥ 2.0 × d</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="standards" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-4">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 05</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Global Standard Reference Library</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold">
+                                <th class="p-3">Standard Authority</th>
+                                <th class="p-3">Designation</th>
+                                <th class="p-3">Profile Angle</th>
+                                <th class="p-3">Dimension Units</th>
+                                <th class="p-3">Primary Industrial Demographics</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">ISO Metric</td>
+                                <td class="p-3">M2, M6, M12 (e.g., M12 x 1.75)</td>
+                                <td class="p-3 font-mono">60°</td>
+                                <td class="p-3">Millimeters (mm)</td>
+                                <td class="p-3">Global Automotive, European Machinery, Commercial Electronics</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">ASME / ANSI B1.1</td>
+                                <td class="p-3">Unified National (UNC, UNF, UNEF)</td>
+                                <td class="p-3 font-mono">60°</td>
+                                <td class="p-3">Inches (TPI)</td>
+                                <td class="p-3">North American Heavy Infrastructure, Defense, Aerospace Systems</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">British Standard</td>
+                                <td class="p-3">BSW (Whitworth), BSF</td>
+                                <td class="p-3 font-mono">55°</td>
+                                <td class="p-3">Inches (TPI)</td>
+                                <td class="p-3">Legacy Commonwealth Tooling, Marine Systems Architecture</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">ASME B1.20.1</td>
+                                <td class="p-3">NPT (National Pipe Tapered)</td>
+                                <td class="p-3 font-mono">60° (1:16 Taper)</td>
+                                <td class="p-3">Inches</td>
+                                <td class="p-3">Fluid Power Fluidics, High-Pressure Gas Plumbing Lines</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">DIN 405</td>
+                                <td class="p-3">Knuckle / Round Thread profile</td>
+                                <td class="p-3 font-mono">30°</td>
+                                <td class="p-3">Metric/Inches</td>
+                                <td class="p-3">Highly Corrosive Scenarios, Brake Links, Food processing tech</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="calculators" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 06</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Multi-Engine Thread Design Calculators</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Validated engineering computational scripts tracking stress cross-sections, drilling configurations, and clamp torques.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 text-blue-700 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-drill"></i><span>1. Tap Drill Size Engine</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-0.5">Major Diameter (mm)</label>
+                                    <input id="calc-td-dia" type="number" value="12" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-0.5">Thread Pitch (mm)</label>
+                                    <input id="calc-td-pitch" type="number" value="1.75" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mb-2 italic">Formula: $D_{drill} = D_{major} - P$</p>
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 flex justify-between items-center">
+                            <span class="text-xs font-medium text-slate-600">Recommended Drill Size:</span>
+                            <span id="calc-td-result" class="text-sm font-bold text-slate-900 font-mono">10.25 mm</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 text-blue-700 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-weight-hanging"></i><span>2. Bolt Tensile Stress Area ($A_t$)</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-0.5">Nominal Size $d$ (mm)</label>
+                                    <input id="calc-ts-dia" type="number" value="10" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-0.5">Pitch $P$ (mm)</label>
+                                    <input id="calc-ts-pitch" type="number" value="1.5" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mb-2 italic">Formula: $A_t = \frac{\pi}{4}(d - 0.9382 P)^2$</p>
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 flex justify-between items-center">
+                            <span class="text-xs font-medium text-slate-600">Stress Area ($A_t$):</span>
+                            <span id="calc-ts-result" class="text-sm font-bold text-slate-900 font-mono">58.00 mm²</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 text-blue-700 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-wrench"></i><span>3. Tightening Torque Engine</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 mb-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Dia $d$ (mm)</label>
+                                    <input id="calc-tq-dia" type="number" value="12" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Preload $F$ (kN)</label>
+                                    <input id="calc-tq-force" type="number" value="25" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Friction Coeff ($K$)</label>
+                                    <input id="calc-tq-k" type="number" value="0.2" step="0.01" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mb-2 italic">Formula: $T = K \cdot F \cdot d$</p>
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 flex justify-between items-center">
+                            <span class="text-xs font-medium text-slate-600">Required Torque:</span>
+                            <span id="calc-tq-result" class="text-sm font-bold text-slate-900 font-mono">60.00 Nm</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 text-blue-700 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-shield-halved"></i><span>4. Thread Shear Strength Matrix</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 mb-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Engagement $L_e$ (mm)</label>
+                                    <input id="calc-sh-len" type="number" value="12" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Dia $d$ (mm)</label>
+                                    <input id="calc-sh-dia" type="number" value="12" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Shear Yield (MPa)</label>
+                                    <input id="calc-sh-yield" type="number" value="250" class="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs font-mono">
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mb-2 italic">Formula: $A_s \approx 0.5 \pi \cdot d \cdot L_e \rightarrow F_{fail} = A_s \cdot \tau_y$</p>
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 flex justify-between items-center">
+                            <span class="text-xs font-medium text-slate-600">Max Shear Load capacity:</span>
+                            <span id="calc-sh-result" class="text-sm font-bold text-slate-900 font-mono">56.55 kN</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="lab" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 07</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Real-Time Parametric Geometric Laboratory</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Modify parameters using the controls below to inspect dynamic configuration modifications rendered directly on the technical matrix.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                                <label class="uppercase">Nominal Radius Scaling</label>
+                                <span id="lbl-lab-rad" class="font-mono">45 px</span>
+                            </div>
+                            <input id="sld-lab-rad" type="range" min="20" max="70" value="45" class="w-full accent-blue-600">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                                <label class="uppercase">Thread Pitch ($P$)</label>
+                                <span id="lbl-lab-pitch" class="font-mono">25 px</span>
+                            </div>
+                            <input id="sld-lab-pitch" type="range" min="10" max="50" value="25" class="w-full accent-blue-600">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                                <label class="uppercase">Thread Geometry Angle</label>
+                                <span id="lbl-lab-ang" class="font-mono">60°</span>
+                            </div>
+                            <input id="sld-lab-ang" type="range" min="29" max="90" value="60" class="w-full accent-blue-600">
+                        </div>
+                    </div>
+                    <div class="lg:col-span-8 bg-slate-900 rounded-xl p-2 flex flex-col items-center justify-center relative min-h-[260px]">
+                        <span class="absolute top-2 left-2 text-[10px] font-mono text-emerald-400 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700">CAD VIEW PORT - PARAMETRIC MATRIX</span>
+                        <canvas id="threadLabCanvas" width="500" height="240" class="w-full h-auto bg-slate-950 rounded"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="manufacturing" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-4">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 08</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Manufacturing Processes Comparison</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-xs">
+                        <div class="flex items-center space-x-2 font-bold text-sm text-slate-900 mb-2">
+                            <div class="w-2 h-2 bg-blue-600 rounded-full"></div><span>Thread Rolling</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3 leading-relaxed">Cold forging technique displacing grain boundaries patterns without cutting fibers away. Boosts tensiles structural parameters cleanly.</p>
+                        <div class="text-[11px] space-y-1 text-slate-500 font-medium">
+                            <div class="flex justify-between"><span>Accuracy:</span><span class="text-emerald-600 font-bold">Excellent</span></div>
+                            <div class="flex justify-between"><span>Production Cost:</span><span class="text-slate-700">Low (High Vol)</span></div>
+                            <div class="flex justify-between"><span>Surface Finish:</span><span class="text-emerald-600 font-bold">Ultra-Smooth</span></div>
+                        </div>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-xs">
+                        <div class="flex items-center space-x-2 font-bold text-sm text-slate-900 mb-2">
+                            <div class="w-2 h-2 bg-blue-600 rounded-full"></div><span>Thread Cutting / Milling</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3 leading-relaxed">Subtractive manufacturing via custom multi-point profiling toolsets paths. Optimal for oversized diameters components layouts.</p>
+                        <div class="text-[11px] space-y-1 text-slate-500 font-medium">
+                            <div class="flex justify-between"><span>Accuracy:</span><span class="text-amber-600 font-bold">High / Moderate</span></div>
+                            <div class="flex justify-between"><span>Production Cost:</span><span class="text-slate-700">Medium</span></div>
+                            <div class="flex justify-between"><span>Surface Finish:</span><span class="text-amber-600 font-bold">Machined Marks</span></div>
+                        </div>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-white shadow-xs">
+                        <div class="flex items-center space-x-2 font-bold text-sm text-slate-900 mb-2">
+                            <div class="w-2 h-2 bg-blue-600 rounded-full"></div><span>Thread Grinding</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-3 leading-relaxed">Abrasive machining offering top tier resolution tolerances thresholds. Restricted to hardened dies and aerospace componentry paths.</p>
+                        <div class="text-[11px] space-y-1 text-slate-500 font-medium">
+                            <div class="flex justify-between"><span>Accuracy:</span><span class="text-emerald-600 font-bold">Sub-Micron</span></div>
+                            <div class="flex justify-between"><span>Production Cost:</span><span class="text-red-600 font-bold">Extremely High</span></div>
+                            <div class="flex justify-between"><span>Surface Finish:</span><span class="text-emerald-600 font-bold">Mirror Grade</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="failure" class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs scroll-mt-20">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Section 11</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Engineering Failure Analysis Gallery</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Click distinct structural failure pathways to explore mechanisms and corrective action engineering designs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="failure-modes-tabs">
+                    <button class="fail-btn p-3 text-left rounded-lg border border-slate-200 hover:bg-slate-50 font-semibold text-xs transition flex items-center justify-between" data-fail="stripping">
+                        <span>Thread Stripping</span><i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                    </button>
+                    <button class="fail-btn p-3 text-left rounded-lg border border-slate-200 hover:bg-slate-50 font-semibold text-xs transition flex items-center justify-between" data-fail="galling">
+                        <span>Galling / Cold Welding</span><i class="fa-solid fa-fire text-red-500"></i>
+                    </button>
+                    <button class="fail-btn p-3 text-left rounded-lg border border-slate-200 hover:bg-slate-50 font-semibold text-xs transition flex items-center justify-between" data-fail="fatigue">
+                        <span>Fatigue Fracture Failure</span><i class="fa-solid fa-heart-crack text-slate-600"></i>
+                    </button>
+                </div>
+
+                <div id="failure-diagnostic-box" class="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-xl hidden">
+                    <h4 id="fail-title" class="font-bold text-sm text-slate-900 mb-2">Failure Mode Analysis</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-white p-3 rounded-lg border border-slate-100">
+                            <span class="font-bold text-red-700 block mb-1"><i class="fa-solid fa-circle-down mr-1"></i> Structural Root Cause</span>
+                            <p id="fail-cause" class="text-slate-600 leading-relaxed"></p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-100">
+                            <span class="font-bold text-emerald-700 block mb-1"><i class="fa-solid fa-shield mr-1"></i> Prevention Strategy</span>
+                            <p id="fail-prevent" class="text-slate-600 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="assistant" class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100 shadow-xs scroll-mt-20">
+                <div class="border-b border-blue-200/60 pb-4 mb-6">
+                    <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Section 15</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">Interactive Thread Selection Assistant</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">Input system operational constraints to output structural geometry and profile class recommendations.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    <div class="space-y-4 bg-white p-5 rounded-xl border border-slate-100 shadow-xs">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Primary Load Type Profile</label>
+                            <select id="sel-load" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs">
+                                <option value="static">Static Assembly / Clamping</option>
+                                <option value="dynamic">High Dynamic Motion / Power Transmission</option>
+                                <option value="heavy-axial">Unidirectional Severe Axial Thrust</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Environmental Conditions</label>
+                            <select id="sel-env" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs">
+                                <option value="standard">Standard Clean Industrial Workshop</option>
+                                <option value="corrosive">Corrosive / Marine Outdoor Exposure</option>
+                                <option value="vibration">High Alternating Vibrational Field</option>
+                            </select>
+                        </div>
+                        <button id="btn-process-selection" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2 rounded shadow-xs transition">
+                            Generate Engineering Architecture Specification
+                        </button>
+                    </div>
+
+                    <div id="selection-output-panel" class="bg-slate-900 text-white p-5 rounded-xl min-h-[195px] flex flex-col justify-between font-mono">
+                        <div>
+                            <span class="text-xs text-emerald-400 font-bold block mb-2"><i class="fa-solid fa-square-poll-horizontal mr-1"></i> ASSISTANT EXPERT RECOMMENDATION</span>
+                            <div id="selection-results" class="text-xs space-y-1.5 text-slate-300">
+                                Click calculate to invoke recommendation logic profiles...
+                            </div>
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-4">Calculations based on standard ISO 261 & ASME B1.1 guidelines.</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-slate-200 py-6 mt-16 text-center text-xs text-slate-400 font-medium">
+        <p>© 2026 Thread Engineering Academy. Open-Access Structural Design Reference Hub.</p>
+    </footer>
+
+    <script>
+        // DATASET FOR SECTION 3: THREAD PROFILE CONFIGURATIONS
+        const threadTypesData = [
+            { title: "ISO Metric Threads (M)", angle: "60° Profile", app: "Global standard commercial fastening fasteners", adv: "High generic availability worldwide", lim: "Susceptible to thread stripping under intense shear cycles" },
+            { title: "Unified Coarse (UNC)", angle: "60° Profile", app: "Deep tapping holes into lower strength cast components", adv: "Robust deep profile handles generic installation torque safely", lim: "Lower precision tracking pitch parameters vs fine lines" },
+            { title: "Unified Fine (UNF)", angle: "60° Profile", app: "Aerospace linkages, fine adjusting precision nodes", adv: "Higher tensile cross-sections capacity limits", lim: "Extremely sensitive to cross-threading assembly slips" },
+            { title: "ACME Trapezoidal", angle: "29° Profile", app: "Lead screws, lathe drive mechanics, clamping vices", adv: "Minimal friction losses during power transfer vectors", lim: "Requires custom cutting profiles toolpaths execution structures" },
+            { title: "Buttress Threads", angle: "7°/45° Asymmetrical", app: "Artillery breeches, extreme structural directional forces holding", adv: "Highest unidirectional strength tracking matrix coefficients", lim: "Virtually zero structural handling capability along reverse axis" },
+            { title: "NPT Tapered Pipe", angle: "60° (1°47' Taper)", app: "High pressure pipeline sealing plumbing interfaces", adv: "Creates automated interference mechanical pressure tight seals", lim: "Requires sealant tape paste to avoid micro spiral leak channels" }
+        ];
+
+        // INJECT SECTION 3 TYPOLOGY CARDS
+        const typesGrid = document.getElementById('thread-types-grid');
+        threadTypesData.forEach(item => {
+            typesGrid.innerHTML += `
+                <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 flex flex-col justify-between hover:shadow-xs transition">
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-900 mb-0.5">${item.title}</h4>
+                        <span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono font-bold">${item.angle}</span>
+                        <div class="mt-3 space-y-1.5 text-xs text-slate-600">
+                            <p><strong>Primary Use:</strong> ${item.app}</p>
+                            <p class="text-emerald-700"><strong>Advantage:</strong> ${item.adv}</p>
+                            <p class="text-amber-700"><strong>Limitation:</strong> ${item.lim}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // SECTION 2 TERMINOLOGY DIRECTORY ACTIONS
+        const termReadoutMap = {
+            "major-dia": { title: "Major Diameter ($d$ / $D$)", desc: "The largest diameter of an external or internal screw thread. It represents the nominal size from which standard designations originate." },
+            "minor-dia": { title: "Minor Diameter ($d_1$ / $D_1$)", desc: "The smallest diameter of the profile. Crucial for tensile strength evaluations because it bounds the core tensile core area matrix." },
+            "pitch-dia": { title: "Pitch Diameter ($d_2$ / $D_2$)", desc: "The imaginary geometric cylinder diameter where thread ridge width matches interstitial groove width exactly. The true core axis tracking structural fits." },
+            "pitch": { title: "Thread Pitch ($P$)", desc: "The axial linear distance measured between corresponding points on consecutive simultaneous threads profiles fields." },
+            "lead": { title: "Thread Lead ($L$)", desc: "The relative distance a screw profile advances axially in a complete 360-degree rotation cycle. ($Lead = Starts \times Pitch$)" },
+            "crest": { title: "Thread Crest Area", desc: "The prominent topmost peak boundary surface linking adjacent flank paths walls elements together." },
+            "root": { title: "Thread Root Valley", desc: "The bottom valley bounding floor surface of the geometric thread groove path. Key source of stress concentrations." },
+            "flank": { title: "Thread Flank Boundary", desc: "The angular sloping surface connecting structural crest platforms to root floors valleys profiles directly." },
+            "angle": { title: "Included Thread Angle ($\alpha$)", desc: "The complete vertex angle measured between opposite structural flank surfaces paths lines (60 degrees for Metric/Unified systems)." }
+        };
+
+        document.querySelectorAll('.term-item').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                const termKey = this.getAttribute('data-term');
+                const data = termReadoutMap[termKey];
+                document.getElementById('term-title').innerText = data.title;
+                document.getElementById('term-desc').innerText = data.desc;
+                
+                // Reset graphic states styles
+                document.querySelectorAll('.interactive-svg-element').forEach(el => el.classList.remove('active-term'));
+                // Highlight target graphic match element
+                const targetSvg = document.getElementById(`svg-${termKey}`);
+                if(targetSvg) targetSvg.classList.add('active-term');
+            });
+        });
+
+        // SECTION 4 NUT INSERTION SIMULATOR
+        const engSlider = document.getElementById('engagement-slider');
+        const boltGroup = document.getElementById('bolt-group');
+        engSlider.addEventListener('input', (e) => {
+            boltGroup.setAttribute('transform', `translate(0, ${e.target.value})`);
+        });
+
+        // SECTION 6 CALCULATOR ENGINE COMPLEX LOGIC EXECUTION
+        function runCalculations() {
+            // Calc 1: Drill size
+            const tdDia = parseFloat(document.getElementById('calc-td-dia').value) || 0;
+            const tdPitch = parseFloat(document.getElementById('calc-td-pitch').value) || 0;
+            document.getElementById('calc-td-result').innerText = (tdDia - tdPitch).toFixed(2) + " mm";
+
+            // Calc 2: Tensile stress area
+            const tsDia = parseFloat(document.getElementById('calc-ts-dia').value) || 0;
+            const tsPitch = parseFloat(document.getElementById('calc-ts-pitch').value) || 0;
+            const stressArea = (Math.PI / 4.0) * Math.pow(tsDia - 0.938194 * tsPitch, 2);
+            document.getElementById('calc-ts-result').innerText = stressArea.toFixed(2) + " mm²";
+
+            // Calc 3: Torque clamping
+            const tqDia = parseFloat(document.getElementById('calc-tq-dia').value) || 0;
+            const tqForce = parseFloat(document.getElementById('calc-tq-force').value) || 0;
+            const tqK = parseFloat(document.getElementById('calc-tq-k').value) || 0;
+            // T = K * F * d (Converting Force kN to N, Dia mm to meters outputs Nm directly)
+            const torque = tqK * (tqForce * 1000) * (tqDia / 1000);
+            document.getElementById('calc-tq-result').innerText = torque.toFixed(2) + " Nm";
+
+            // Calc 4: Shear strength
+            const shLen = parseFloat(document.getElementById('calc-sh-len').value) || 0;
+            const shDia = parseFloat(document.getElementById('calc-sh-dia').value) || 0;
+            const shYield = parseFloat(document.getElementById('calc-sh-yield').value) || 0;
+            const shearArea = 0.5 * Math.PI * shDia * shLen; 
+            const failForce = (shearArea * shYield) / 1000.0; // output in kN
+            document.getElementById('calc-sh-result').innerText = failForce.toFixed(2) + " kN";
+        }
+
+        // Bind multi inputs events triggers instantly
+        ['calc-td-dia', 'calc-td-pitch', 'calc-ts-dia', 'calc-ts-pitch', 'calc-tq-dia', 'calc-tq-force', 'calc-tq-k', 'calc-sh-len', 'calc-sh-dia', 'calc-sh-yield']
+        .forEach(id => document.getElementById(id).addEventListener('input', runCalculations));
+        runCalculations();
+
+        // SECTION 7: PARAMETRIC CANVAS ENGINE RENDERING
+        const canvas = document.getElementById('threadLabCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const sldRad = document.getElementById('sld-lab-rad');
+        const sldPitch = document.getElementById('sld-lab-pitch');
+        const sldAng = document.getElementById('sld-lab-ang');
+
+        function renderLabCanvas() {
+            const radius = parseInt(sldRad.value);
+            const pitch = parseInt(sldPitch.value);
+            const angleDeg = parseInt(sldAng.value);
+
+            // Update user text readout tags
+            document.getElementById('lbl-lab-rad').innerText = radius + " px";
+            document.getElementById('lbl-lab-pitch').innerText = pitch + " px";
+            document.getElementById('lbl-lab-ang').innerText = angleDeg + "°";
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid line backgrounds tracking precision
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 0.5;
+            for(let x=0; x<canvas.width; x+=30) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+
+            // Dynamic parametric profile pathway generation loop
+            ctx.beginPath();
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2.5;
+            ctx.fillStyle = 'rgba(14, 165, 233, 0.15)';
+
+            let startX = 20;
+            let startY = canvas.height / 2 - radius;
+            ctx.moveTo(startX, canvas.height / 2 + radius);
+
+            // Convert angle to calculate tooth horizontal depth displacement delta offset paths
+            const angleRad = (angleDeg * Math.PI) / 180.0;
+            let toothDepth = (pitch / 2.0) / Math.tan(angleRad / 2.0);
+            if (toothDepth > radius * 0.8) toothDepth = radius * 0.8; // clamp geometry distortion
+
+            // Step multi teeth layouts across the viewport frame
+            for(let x = 40; x < canvas.width - 40; x += pitch) {
+                ctx.lineTo(x, canvas.height / 2 - radius);
+                ctx.lineTo(x + pitch/2, canvas.height / 2 - radius + toothDepth);
+            }
+
+            ctx.lineTo(canvas.width - 40, canvas.height / 2 + radius);
+            ctx.stroke();
+            ctx.fill();
+
+            // Center tracking axis vector
+            ctx.beginPath();
+            ctx.strokeStyle = '#22c55e';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([6, 4]);
+            ctx.moveTo(0, canvas.height/2);
+            ctx.lineTo(canvas.width, canvas.height/2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        [sldRad, sldPitch, sldAng].forEach(slider => slider.addEventListener('input', renderLabCanvas));
+        renderLabCanvas(); // Initialization render call
+
+        // SECTION 11: FAILURE SELECTOR ENGINE MANAGEMENT
+        const failureModes = {
+            "stripping": { 
+                cause: "Internal or external thread shear due to over-tightening or insufficient engagement length. Shear load exceeds the mechanical cross-sectional capacity of the raw materials.",
+                prevent: "Increase total internal structural engagement length thickness or move target specification configuration materials to higher yield stress strength classes alloys."
+            },
+            "galling": { 
+                cause: "Severe friction-induced adhesive wear causing localized micro-welding between contact flanks. Extremely prevalent in stainless steel, aluminum, and titanium assemblies.",
+                prevent: "Apply high-performance anti-seize lubricants (molybdenum disulfide) or execute disparate hardness pairings across mating surfaces."
+            },
+            "fatigue": { 
+                cause: "Progressive microscopic structural cracking expanding from high stress concentration nodes (root valleys) under cyclic load changes.",
+                prevent: "Utilize rolled thread execution methods instead of cut paths profiles to compress structural root boundaries into favorable pre-stressed distributions."
+            }
+        };
+
+        document.querySelectorAll('.fail-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetKey = this.getAttribute('data-fail');
+                const data = failureModes[targetKey];
+                
+                document.getElementById('fail-title').innerText = this.innerText + " Diagnostics Analysis";
+                document.getElementById('fail-cause').innerText = data.cause;
+                document.getElementById('fail-prevent').innerText = data.prevent;
+                document.getElementById('failure-diagnostic-box').classList.remove('hidden');
+
+                document.querySelectorAll('.fail-btn').forEach(b => b.classList.remove('border-blue-500', 'bg-blue-50'));
+                this.add('border-blue-500', 'bg-blue-50');
+            });
+        });
+
+        // SECTION 15: INTELLIGENT EXPERT RECOMMENDER MATRIX LOGIC
+        document.getElementById('btn-process-selection').addEventListener('click', () => {
+            const load = document.getElementById('sel-load').value;
+            const env = document.getElementById('sel-env').value;
+            let outputHTML = "";
+
+            if (load === "static" && env === "standard") {
+                outputHTML = "<strong>Recommended System:</strong> ISO Metric Coarse (Standard Standard Profile)<br><strong>Thread Grade Fit:</strong> Class 6g / 6H Normal Fit Tolerances<br><strong>Locking Assembly:</strong> Standard split washer combination configuration loops.";
+            } else if (load === "dynamic") {
+                outputHTML = "<strong>Recommended System:</strong> Trapezoidal ACME System Standard Profiles<br><strong>Thread Grade Fit:</strong> Centralized Class 2C Lead configurations Fit Matrix<br><strong>Locking Assembly:</strong> Double backing backlash compensating alignment nut lock blocks.";
+            } else if (env === "corrosive") {
+                outputHTML = "<strong>Recommended System:</strong> ISO Metric Coarse Core - Stainless A4 (316 Grade)<br><strong>Thread Grade Fit:</strong> Loose Fit Tolerance Class 7g / 7H to accept anti-seize lubrication coating layers.<br><strong>Locking Assembly:</strong> Chemical polymer structural threadlocker thread compound fluid injection.";
+            } else if (env === "vibration") {
+                outputHTML = "<strong>Recommended System:</strong> Unified National Fine Profile (UNF Profiles System)<br><strong>Thread Grade Fit:</strong> High Class Tension Fit 3A / 3B Aerospace Structural Matrix<br><strong>Locking Assembly:</strong> Mechanical Nylon ring compression insert (Nylock nut architecture).";
+            } else {
+                outputHTML = "<strong>Recommended System:</strong> Custom Buttress Heavy Unidirectional Profile Threading<br><strong>Thread Grade Fit:</strong> High accuracy precision fit clearance matrices.<br><strong>Locking Assembly:</strong> Cross wired castle nut configurations design loops.";
+            }
+
+            document.getElementById('selection-results').innerHTML = outputHTML;
+        });
+    </script>
+</body>
+</html>
